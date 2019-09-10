@@ -1,0 +1,35 @@
+{
+  "name": "@leismore/auth_app_self",
+  "version": "1.0.0",
+  "description": "A NodeJS application providing authentication and authorization services for all LMOS NodeJS applications.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/leismore/auth_app_self.git"
+  },
+  "keywords": [
+    "Authentication",
+    "Authorization",
+    "API"
+  ],
+  "author": "Kyle Chine",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/leismore/auth_app_self/issues"
+  },
+  "homepage": "https://github.com/leismore/auth_app_self#readme",
+  "dependencies": {
+    "@leismore/error_handler_error": "^1.0.0",
+    "@leismore/error_handler_lmerror": "^1.0.0",
+    "@leismore/lmerror": "^1.0.0",
+    "@leismore/response": "^1.2.0",
+    "@leismore/token": "^2.0.1",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "nano": "^8.1.0"
+  }
+}
