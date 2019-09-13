@@ -1,0 +1,25 @@
+{
+  "app":
+  {
+    "projectName":  "auth_app_self",
+    "host":         "localhost",
+    "port":         "YOUR_HOST_PORT",
+    "backlog":       511
+  },
+
+  "couchdb":
+  {
+    "designName":   "auth_app_self"
+  },
+
+  "api":
+  {
+    "baseURL": "/api/",
+    "authen":  {
+      "url":     "authenticator"
+    },
+    "author":  {
+      "url":     "authorizer"
+    }
+  }
+}
