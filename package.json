@@ -27,6 +27,7 @@
     "@leismore/lmerror": "^1.0.0",
     "@leismore/response": "^1.2.0",
     "@leismore/token": "^2.0.1",
+    "axios": "^0.19.0",
     "basic-auth": "^2.0.1",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
