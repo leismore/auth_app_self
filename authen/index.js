@@ -4,11 +4,7 @@
  * @res.locals
  * {
  *   AuthenError:    {AuthenError}
- *   inputs:
- *   {
- *     appID:        {string}
- *     token:        {string}
- *   }
+ *   inputs:         {AuthenInputs object}
  *   db:             {nano}
  * }
  */

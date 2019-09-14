@@ -4,10 +4,13 @@
 
 'use strict';
 
-const AuthenError = require('../lib/AuthenError');
+const AuthenError  = require('../lib/AuthenError');
+const AuthenInputs = require('../lib/AuthenInputs');
 
 function post_handler1(req, res, next)
 {
+  let inputs = null;
+
   // Test media type
   if ( !req.is('application/json') )
   {
@@ -15,26 +18,17 @@ function post_handler1(req, res, next)
     return;
   }
 
-  // Test appID
-  if ( typeof req.body.appID !== 'string' || req.body.appID.length === 0 )
-  {
-    next( new AuthenError('invalid appID', 8, 415) );
-    return;
-  }
-
-  // Test token
-  if ( typeof req.body.token !== 'string' || req.body.token.length === 0 )
-  {
-    next( new AuthenError('invalid token', 9, 415) );
+  // Test input data
+  try {
+    inputs = new AuthenInputs(req.body);
+  } catch (e) {
+    next(e);
     return;
   }
 
   // Normalization
   res.locals.AuthenError = AuthenError;
-  res.locals.inputs      = {
-    appID:  String(req.body.appID),
-    token:  String(req.body.token)
-  };
+  res.locals.inputs      = inputs;
 
   next();
 }

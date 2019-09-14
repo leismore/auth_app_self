@@ -9,7 +9,8 @@
 
   "couchdb":
   {
-    "designName":   "auth_app_self"
+    "designName":   "auth_app_self",
+    "dbPrefix":     "lmos"
   },
 
   "api":
