@@ -18,10 +18,12 @@
   {
     "baseURL": "/api/",
     "authen":  {
-      "url":     "authenticator"
+      "url":     "authenticator",
+      "timeout": 10000
     },
     "author":  {
-      "url":     "authorizer"
+      "url":     "authorizer",
+      "timeout": 10000
     }
   }
 }
