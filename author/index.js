@@ -3,8 +3,8 @@
  *
  * @res.locals
  * {
- *   AuthorError:    {AuthorError}
+ *   AuthorError:    {AuthorError class}
  *   inputs:         {AuthorInputs object}
- *   db:             {nano}
+ *   db:             {nano object}
  * }
  */
