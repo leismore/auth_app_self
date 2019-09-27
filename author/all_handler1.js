@@ -15,4 +15,8 @@ module.exports = (req, res) => {
   {
     resp.res405(ALLOWED);
   }
+  else
+  {
+    next('route');
+  }
 };
