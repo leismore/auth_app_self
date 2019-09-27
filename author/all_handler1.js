@@ -7,7 +7,7 @@
 const AuthorResponse = require('../lib/AuthorResponse');
 const ALLOWED        = ['OPTIONS', 'GET', 'POST'];
 
-module.exports = (req, res) => {
+module.exports = (req, res, next) => {
 
   const resp = new AuthorResponse(res);
 

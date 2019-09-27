@@ -7,7 +7,7 @@
 const AuthenResponse = require('../lib/AuthenResponse');
 const ALLOWED        = ['OPTIONS', 'GET', 'POST'];
 
-module.exports = (req, res) => {
+module.exports = (req, res, next) => {
 
   const resp = new AuthenResponse(res);
 
