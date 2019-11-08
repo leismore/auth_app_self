@@ -1,71 +1,75 @@
 /**
  * AuthorInputs class: the input data for authorization.
- * {
- *   credential: {AuthenInputs object}
- *   data:
- *   {
- *     clientID:    {string}  appID UUID
- *     hostID:      {string}  appID UUID
- *     permission:  {string}  Permission name
- *   }
- * }
  */
 
-'use strict';
-
-const AuthorError  = require('./AuthorError');
-const AuthenInputs = require('./AuthenInputs');
-const auth         = require('basic-auth');
+import * as auth                                        from 'basic-auth';
+import { AuthorError }                                  from './AuthorError';
+import { AuthenInputs }                                 from './AuthenInputs';
+import { AuthenInputs              as InputCredential } from './type/AuthenInputs';
+import { AuthorInputs_noCredential as InputData       } from './type/AuthorInputs';
 
 class AuthorInputs
 {
+  public readonly credential: AuthenInputs;
+  public readonly data:       InputData;
+
   /**
-   * @param {string} credential - The value of HTTP Header Authorization
-   * @param {clientID (string), hostID (string), permission (string)} data
-   * @throws {AuthorError}
+   * @throw {AuthorError}
    */
-  constructor(credential, data)
+  public constructor(credentialHTTP: string, data: InputData)
   {
-    credential = auth.parse(credential);
-    if (credential === undefined)
+    let credential:      AuthenInputs;    // AuthenInputs class instance
+    let credentialInput: InputCredential; // Data for AuthenInputs class
+
+    // Test credential
+    let credentialHTTP_parsed = auth.parse(String(credentialHTTP));
+    if (credentialHTTP_parsed === undefined)
     {
-      throw new AuthorError('invalid credential', 9, 415);
+      let error = {message: 'invalid credential', code: '5'};
+      let response = {statusCode: '415'};
+      throw new AuthorError(error, response);
     }
     else
     {
       try {
-        credential = {
-          appID: credential.name,
-          token: credential.pass
+        credentialInput = {
+          appID: credentialHTTP_parsed.name,
+          token: credentialHTTP_parsed.pass
         };
-        credential = new AuthenInputs(credential);
+        credential = new AuthenInputs(credentialInput);
       } catch (e) {
-        throw new AuthorError('invalid credential', 9, 415, e);
+        let error = {message: 'invalid credential', code: '5'};
+        let response = {statusCode: '415'};
+        throw new AuthorError(error, response, e);
       }
     }
 
+    // Test data
     if (typeof data.clientID !== 'string' || data.clientID.length === 0)
     {
-      throw new AuthorError('invalid clientID', 10, 415);
+      let error = {message: 'invalid clientID', code: '6'};
+      let response = {statusCode: '415'};
+      throw new AuthorError(error, response);
     }
 
     if (typeof data.hostID !== 'string' || data.hostID.length === 0)
     {
-      throw new AuthorError('invalid hostID', 11, 415);
+      let error = {message: 'invalid hostID', code: '7'};
+      let response = {statusCode: '415'};
+      throw new AuthorError(error, response);
     }
 
     if (typeof data.permission !== 'string' || data.permission.length === 0)
     {
-      throw new AuthorError('invalid permission', 12, 415);
+      let error = {message: 'invalid permission', code: '8'};
+      let response = {statusCode: '415'};
+      throw new AuthorError(error, response);
     }
 
+    // Init.
     this.credential = credential;
-    this.data = {
-      clientID:   data.clientID,
-      hostID:     data.hostID,
-      permission: data.permission
-    };
+    this.data       = data;
   }
 }
 
-module.exports = AuthorInputs;
+export { AuthorInputs };
