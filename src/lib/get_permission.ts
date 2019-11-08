@@ -1,19 +1,21 @@
 /**
  * get_permission function: Get permission from the CouchDB by clientID, hostID, permission
- * @param   {nano-db} db         - Nano database
- * @param   {array}   queryKeys  - [clientID, hostID, permission], all strings
- * @returns {Promise}            - The result
  */
 
-'use strict';
-
-const CONFIG         = require('../config.json');
+import { View_getPermission }     from './type/View_getPermission';
+import { View_getPermission_key } from './type/View_getPermission_key';
+import * as NANO                  from 'nano';
+import * as CONFIG                from '../config.json';
 const DESIGN_NAME    = CONFIG.couchdb.designName;
 const VIEW_NAME      = 'get_permission';
 
-async function get_permission(db, queryKeys)
+/**
+ * @param  queryKeys - [clientID, hostID, permission], all strings
+ */
+async function get_permission(db:NANO.DocumentScope<View_getPermission>, queryKeys:View_getPermission_key)
+  :Promise<NANO.DocumentViewResponse<unknown,View_getPermission>>
 {
   return db.view(DESIGN_NAME, VIEW_NAME, {key: queryKeys});
 }
 
-module.exports = get_permission;
+export { get_permission };
