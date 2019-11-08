@@ -1,31 +1,33 @@
 /**
  * AuthenInputs class: the input data for authentication.
- * {
- *   appID:  {string}
- *   token:  {string}
- * }
  */
 
-'use strict';
-
-const AuthenError = require('./AuthenError');
+import { AuthenError }            from './AuthenError';
+import { AuthenInputs as Inputs } from './type/AuthenInputs';
 
 class AuthenInputs
 {
+  public readonly appID:string;
+  public readonly token:string;
+
   /**
    * @param {appID: string, token: string} inputs
    * @throws {AuthenError}
    */
-  constructor(inputs)
+  public constructor(inputs:Inputs)
   {
     if ( typeof inputs.appID !== 'string' || inputs.appID.length === 0 )
     {
-      throw new AuthenError('invalid appID', 8, 415);
+      let error = {message:'invalid appID', code: '4'};
+      let response = {statusCode:'415'};
+      throw new AuthenError(error, response);
     }
 
     if ( typeof inputs.token !== 'string' || inputs.token.length === 0 )
     {
-      throw new AuthenError('invalid token', 9, 415);
+      let error = {message:'invalid token', code: '5'};
+      let response = {statusCode:'415'};
+      throw new AuthenError(error, response);
     }
 
     this.appID = inputs.appID;
@@ -33,4 +35,4 @@ class AuthenInputs
   }
 }
 
-module.exports = AuthenInputs;
+export { AuthenInputs };
