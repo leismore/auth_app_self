@@ -3,6 +3,6 @@
  * Refer to <https://www.npmjs.com/package/cors#configuration-options>
  */
 
-'use strict';
+let corsOrigin = 'http://YOUR-DOMAIN.com';
 
-module.exports = 'http://YOUR-DOMAIN.com';
+export { corsOrigin };
