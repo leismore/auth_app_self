@@ -2,7 +2,8 @@
   "name": "@leismore/auth_app_self",
   "version": "1.0.0",
   "description": "A NodeJS application providing authentication and authorization services for all LMOS NodeJS applications.",
-  "main": "index.js",
+  "main":  "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -22,11 +23,10 @@
   },
   "homepage": "https://github.com/leismore/auth_app_self#readme",
   "dependencies": {
-    "@leismore/error_handler_error": "^1.0.0",
-    "@leismore/error_handler_lmerror": "^1.0.0",
-    "@leismore/lmerror": "^1.0.0",
-    "@leismore/response": "^1.3.0",
-    "@leismore/token": "^2.0.1",
+    "@leismore/error_handler_last": "^1.0.1",
+    "@leismore/lmerror": "^4.0.1",
+    "@leismore/response": "^3.0.2",
+    "@leismore/token": "^3.0.3",
     "axios": "^0.19.0",
     "basic-auth": "^2.0.1",
     "body-parser": "^1.19.0",
