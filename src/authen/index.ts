@@ -3,7 +3,6 @@
  *
  * @res.locals
  * {
- *   AuthenError:    {AuthenError}
  *   inputs:         {AuthenInputs object}
  *   db:             {nano}
  * }

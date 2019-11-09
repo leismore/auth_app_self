@@ -33,7 +33,6 @@ function post_handler1(req:express.Request, res:express.Response, next:express.N
   }
 
   // Normalization
-  res.locals.AuthenError = AuthenError;
   res.locals.inputs      = inputs;
 
   next();

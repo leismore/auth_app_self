@@ -14,4 +14,4 @@ interface View_getToken
   readonly rows:       [Token_getToken] | [],
 }
 
-export {View_getToken};
+export { View_getToken, Token_getToken };
