@@ -2,28 +2,26 @@
  * POST handler 2 - Authentication
  */
 
-import { Token }          from '@leismore/token';
-import * as express       from 'express';
-import * as nano          from 'nano';
-import * as CONFIG        from '../config.json';
-import { connect_db }     from '../lib/connect_db';
-import { get_token }      from '../lib/get_token';
-import { AuthenResponse } from '../lib/AuthenResponse';
-import { AuthenInputs } from '../lib/AuthenInputs';
-import { AuthenError }    from '../lib/AuthenError';
-import { Token_getToken as TokenDB, View_getToken as ResultDB } from '../lib/type/View_getToken';
-const DB_NAME = CONFIG.couchdb.dbPrefix + '_private_app_authentication';
+'use strict';
 
-function post_handler2(_req:express.Request, res:express.Response, next:express.NextFunction):void
+const CONFIG         = require('../config.json');
+const DB_NAME        = CONFIG.couchdb.dbPrefix + '_private_app_authentication';
+const connect_db     = require('../lib/connect_db');
+const get_token      = require('../lib/get_token');
+const AuthenResponse = require('../lib/AuthenResponse');
+const Token          = require('@leismore/token');
+
+function post_handler2(req, res, next)
 {
-  const inputs:AuthenInputs = res.locals.inputs;
+  const AuthenError = res.locals.AuthenError;
+  const inputs      = res.locals.inputs;
   const resp        = new AuthenResponse(res);
   let   dataFromDB  = {
     appID:     null,
     token:     null
   };
   let r             = null;
-  let db:nano.DocumentScope<ResultDB>;
+  let db            = null;
 
   // Connect to DB
   try {
@@ -75,4 +73,4 @@ function post_handler2(_req:express.Request, res:express.Response, next:express.
 
 }
 
-export { post_handler2 };
+module.exports = post_handler2;
