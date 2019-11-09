@@ -2,25 +2,31 @@
  * POST Handler 1 - Verify Client Input
  */
 
-'use strict';
+import * as express     from 'express';
+import { AuthenError }  from '../lib/AuthenError';
+import { AuthenInputs } from '../lib/AuthenInputs';
 
-const AuthenError  = require('../lib/AuthenError');
-const AuthenInputs = require('../lib/AuthenInputs');
-
-function post_handler1(req, res, next)
+function post_handler1(req:express.Request, res:express.Response, next:express.NextFunction):void
 {
-  let inputs = null;
+  let inputs:AuthenInputs;
 
   // Test media type
-  if ( !req.is('application/json') )
+  if ( req.is('application/json') === false )
   {
-    next( new AuthenError('not application/json', 5, 415) );
+    let error = {message: 'not application/json', code: '1'};
+    let response = {
+      statusCode: '415'
+    };
+    next( new AuthenError(error, response) );
     return;
   }
 
   // Test input data
   try {
-    inputs = new AuthenInputs(req.body);
+    inputs = new AuthenInputs({
+      appID: req.body.appID,
+      token: req.body.token
+    });
   } catch (e) {
     next(e);
     return;
@@ -33,4 +39,4 @@ function post_handler1(req, res, next)
   next();
 }
 
-module.exports = post_handler1;
+export { post_handler1 };
