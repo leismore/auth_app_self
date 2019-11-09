@@ -2,11 +2,11 @@
  * AuthorInputs class: the input data for authorization.
  */
 
-import * as auth                                        from 'basic-auth';
-import { AuthorError }                                  from './AuthorError';
-import { AuthenInputs }                                 from './AuthenInputs';
-import { AuthenInputs              as InputCredential } from './type/AuthenInputs';
-import { AuthorInputs_noCredential as InputData       } from './type/AuthorInputs';
+import * as auth                           from 'basic-auth';
+import { AuthorError }                     from './AuthorError';
+import { AuthenInputs }                    from './AuthenInputs';
+import { AuthenInputs as InputCredential } from './type/AuthenInputs';
+import { AuthorInputs as InputData       } from './type/AuthorInputs';
 
 class AuthorInputs
 {
@@ -68,7 +68,11 @@ class AuthorInputs
 
     // Init.
     this.credential = credential;
-    this.data       = data;
+    this.data       = {
+      clientID:   data.clientID,
+      hostID:     data.hostID,
+      permission: data.permission
+    };
   }
 }
 
