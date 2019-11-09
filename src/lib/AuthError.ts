@@ -4,7 +4,7 @@
  *
  * Code           Message
  * 1              not application/json
- * 2              connect CouchDB failure
+ * 2              CouchDB: connection failure
  */
 
 import { LMError } from '@leismore/lmerror';
