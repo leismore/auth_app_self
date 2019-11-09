@@ -2,21 +2,25 @@
  * All Handler 1 - Prevent not-allowed HTTP methods
  */
 
-'use strict';
-
-const AuthorResponse = require('../lib/AuthorResponse');
+import * as express from 'express';
+import { AuthorError } from '../lib/AuthorError';
 const ALLOWED        = ['OPTIONS', 'GET', 'POST'];
 
-module.exports = (req, res, next) => {
-
-  const resp = new AuthorResponse(res);
-
-  if ( ALLOWED.includes(req.method.toUpperCase()) === false )
+function all_handler1(req:express.Request, _res:express.Response, next:express.NextFunction):void
+{
+  if ( ALLOWED.includes( req.method.toUpperCase() ) === false )
   {
-    resp.res405(ALLOWED);
+    let error = {message: 'HTTP 405: Method Not Allowed', code: '9'};
+    let response = {
+      statusCode: '405',
+      headers: {'Allow': ALLOWED.join(', ')}
+    };
+    next( new AuthorError(error, response) );
   }
   else
   {
     next('route');
   }
-};
+}
+
+export { all_handler1 };
