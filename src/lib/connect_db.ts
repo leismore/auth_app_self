@@ -19,7 +19,7 @@ function connect_db():NANO.ServerScope
                    CREDENTIAL.port
     );
   } catch (e) {
-    let error = { message: 'connect CouchDB failure', code: '2' };
+    let error = { message: 'CouchDB: connection failure', code: '2' };
     let response = { statusCode:'500' };
     throw new AuthError(error, response, e);
   }
