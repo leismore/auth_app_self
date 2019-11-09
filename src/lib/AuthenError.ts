@@ -8,6 +8,7 @@
  * 3              CouchDB: get_token failure
  * 4              invalid appID
  * 5              invalid token
+ * 6              HTTP 405: Method Not Allowed
  */
 
 import { LMError } from '@leismore/lmerror';
