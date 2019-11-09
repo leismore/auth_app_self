@@ -4,8 +4,8 @@
  *
  * Code           Message
  * 1              not application/json
- * 2              connect CouchDB failure
- * 3              CouchDB: get_token failure
+ * 2              CouchDB: connection failure
+ * 3              CouchDB (View): get_token failure
  * 4              invalid appID
  * 5              invalid token
  * 6              HTTP 405: Method Not Allowed

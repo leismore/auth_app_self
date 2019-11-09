@@ -4,8 +4,8 @@
  *
  * Code           Message
  * 1              not application/json
- * 2              connect CouchDB failure
- * 3              CouchDB: get_permission failure
+ * 2              CouchDB: connection failure
+ * 3              CouchDB (View): get_permission failure
  * 4              authentication failure
  * 5              invalid credential
  * 6              invalid clientID
