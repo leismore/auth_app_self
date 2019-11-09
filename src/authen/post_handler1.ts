@@ -23,10 +23,7 @@ function post_handler1(req:express.Request, res:express.Response, next:express.N
 
   // Test input data
   try {
-    inputs = new AuthenInputs({
-      appID: req.body.appID,
-      token: req.body.token
-    });
+    inputs = new AuthenInputs(req.body);
   } catch (e) {
     next(e);
     return;

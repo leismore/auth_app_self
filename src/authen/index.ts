@@ -4,7 +4,6 @@
  * @res.locals
  * {
  *   inputs:         {AuthenInputs object}
- *   db:             {nano}
  * }
  */
 

@@ -3,9 +3,7 @@
  *
  * @res.locals
  * {
- *   AuthorError:    {AuthorError class}
  *   inputs:         {AuthorInputs object}
- *   db:             {nano object}
  * }
  */
 
