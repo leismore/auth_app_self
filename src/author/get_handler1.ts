@@ -2,11 +2,15 @@
  * Get Handler 1 - READY response.
  */
 
-'use strict';
+import * as express from 'express';
+import { AuthorResponse } from '../lib/AuthorResponse';
 
-const AuthorResponse = require('../lib/AuthorResponse');
-
-module.exports = (req, res) => {
+function get_handler1(_req:express.Request, res:express.Response):void
+{
   const resp = new AuthorResponse(res);
-  resp.res204();
-};
+  resp.send({
+    statusCode: '204'
+  });
+}
+
+export { get_handler1 };

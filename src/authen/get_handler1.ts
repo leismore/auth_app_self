@@ -2,11 +2,15 @@
  * Get Handler 1 - READY response.
  */
 
-'use strict';
+import * as express from 'express';
+import { AuthenResponse } from '../lib/AuthenResponse';
 
-const AuthenResponse = require('../lib/AuthenResponse');
-
-module.exports = (req, res) => {
+function get_handler1(_req:express.Request, res:express.Response):void
+{
   const resp = new AuthenResponse(res);
-  resp.res204();
-};
+  resp.send({
+    statusCode: '204'
+  });
+}
+
+export { get_handler1 };
