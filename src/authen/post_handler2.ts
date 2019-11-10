@@ -8,23 +8,21 @@ import { Token }          from '@leismore/token';
 
 import { AuthenError }    from '../lib/AuthenError';
 import { AuthenResponse } from '../lib/AuthenResponse';
+import { AuthenInputs }   from '../lib/AuthenInputs';
 import { connect_db }     from '../lib/connect_db';
 import { get_token }      from '../lib/get_token';
 import { AuthenDoc }      from '../lib/type/db_doc_authen';
+import { AuthenDB }       from '../lib/type/AuthenDB';
 
 import * as CONFIG        from '../config.json';
 const DB_NAME             = CONFIG.couchdb.dbPrefix + '_private_app_authentication';
 
 function post_handler2(_req:express.Request, res:express.Response, next:express.NextFunction):void
 {
-  const inputs      = res.locals.inputs;
-  const resp        = new AuthenResponse(res);
-  let   dataFromDB  = {
-    appID:     null,
-    token:     null
-  };
-  
-  let db:nano.DocumentScope<AuthenDoc>;
+  const inputs:AuthenInputs  = res.locals.inputs;
+  const resp                 = new AuthenResponse(res);
+  let   dataFromDB:AuthenDB;
+  let   db:nano.DocumentScope<AuthenDoc>;
 
   // Connect to DB
   try {
@@ -49,16 +47,18 @@ function post_handler2(_req:express.Request, res:express.Response, next:express.
     }
     else
     {
-      dataFromDB.appID = r.rows[0].key;
-      dataFromDB.token = new Token(
-        r.rows[0].value.token,
-        r.rows[0].value.generated,
-        r.rows[0].value.expiry
-      );
+      dataFromDB = {
+        appID:       r.rows[0].key,
+        token:       new Token({
+          token:     r.rows[0].value.token,
+          generated: r.rows[0].value.generated,
+          expiry:    r.rows[0].value.expiry === null ? undefined : r.rows[0].value.expiry
+        })
+      };
     }
 
     // Auth.
-    if ( dataFromDB.token.verify(inputs.token) )
+    if ( dataFromDB.token.verify(inputs.token) === true )
     {
       resp.res200(true);
       return;
