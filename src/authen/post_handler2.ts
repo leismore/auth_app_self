@@ -2,32 +2,37 @@
  * POST handler 2 - Authentication
  */
 
-'use strict';
+import * as express       from 'express';
+import * as nano          from 'nano';
+import { Token }          from '@leismore/token';
 
-const CONFIG         = require('../config.json');
-const DB_NAME        = CONFIG.couchdb.dbPrefix + '_private_app_authentication';
-const connect_db     = require('../lib/connect_db');
-const get_token      = require('../lib/get_token');
-const AuthenResponse = require('../lib/AuthenResponse');
-const Token          = require('@leismore/token');
+import { AuthenError }    from '../lib/AuthenError';
+import { AuthenResponse } from '../lib/AuthenResponse';
+import { connect_db }     from '../lib/connect_db';
+import { get_token }      from '../lib/get_token';
+import { AuthenDoc }      from '../lib/type/db_doc_authen';
 
-function post_handler2(req, res, next)
+import * as CONFIG        from '../config.json';
+const DB_NAME             = CONFIG.couchdb.dbPrefix + '_private_app_authentication';
+
+function post_handler2(_req:express.Request, res:express.Response, next:express.NextFunction):void
 {
-  const AuthenError = res.locals.AuthenError;
   const inputs      = res.locals.inputs;
   const resp        = new AuthenResponse(res);
   let   dataFromDB  = {
     appID:     null,
     token:     null
   };
-  let r             = null;
-  let db            = null;
+  
+  let db:nano.DocumentScope<AuthenDoc>;
 
   // Connect to DB
   try {
     db = connect_db().use(DB_NAME);
   } catch (e) {
-    next( new AuthenError('connect CouchDB failure', 6, 500, e) );
+    let error = {message: 'CouchDB: connection failure', code: '2'};
+    let response = {statusCode: '500'};
+    next( new AuthenError(error, response, e) );
     return;
   }
 
@@ -67,10 +72,12 @@ function post_handler2(req, res, next)
   })
 
   .catch( e => {
-    next( new AuthenError('CouchDB: get_token failure', 7, 500, e) );
+    let error = {message: 'CouchDB (View): get_token failure', code: '3'};
+    let response = {statusCode: '500'};
+    next( new AuthenError(error, response, e) );
     return;
   });
 
 }
 
-module.exports = post_handler2;
+export { post_handler2 };
