@@ -2,34 +2,41 @@
  * POST Handler 1 - Verify Client Input
  */
 
-'use strict';
+import * as express     from 'express';
+import { AuthorError }  from '../lib/AuthorError';
+import { AuthorInputs } from '../lib/AuthorInputs';
 
-const AuthorError    = require('../lib/AuthorError');
-const AuthorInputs   = require('../lib/AuthorInputs');
-
-function post_handler1(req, res, next)
+function post_handler1(req:express.Request, res:express.Response, next:express.NextFunction):void
 {
-  let inputs = null;
+  let inputs:AuthorInputs;
 
   // Test media type
-  if ( !req.is('application/json') )
+  if ( req.is('application/json') === false )
   {
-    next( new AuthorError('not application/json', 5, 415) );
+    let error = {message: 'not application/json', code: '1'};
+    let response = {statusCode: '415'};
+    next( new AuthorError(error, response) );
     return;
   }
 
   // Test input data
   try {
-    inputs = new AuthorInputs( req.get('Authorization'), req.body );
+    let httpAuthor = req.get('Authorization');
+    if (httpAuthor === undefined)
+    {
+      let error = {message: 'invalid credential', code: '5'};
+      let response = {statusCode: '415'};
+      throw new AuthorError(error, response);
+    }
+    inputs = new AuthorInputs( httpAuthor, req.body );
   } catch (e) {
     next(e);
     return;
   }
 
   // Next
-  res.locals.AuthorError = AuthorError;
   res.locals.inputs      = inputs;
   next();
 }
 
-module.exports = post_handler1;
+export { post_handler1 };
