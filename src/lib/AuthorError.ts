@@ -12,6 +12,7 @@
  * 7              invalid hostID
  * 8              invalid permission
  * 9              HTTP 405: Method Not Allowed
+ * 10             authentication server failure
  */
 
 import { LMError } from '@leismore/lmerror';

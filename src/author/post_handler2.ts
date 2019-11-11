@@ -2,27 +2,27 @@
  * POST Handler 2 - Authentication
  */
 
-'use strict';
+import * as express                           from 'express';
+import {default as axios, AxiosRequestConfig} from 'axios';
+import { AuthorError }                        from '../lib/AuthorError';
+import { AuthorInputs }                       from '../lib/AuthorInputs';
+import * as CONFIG                            from '../config.json';
+const API = 'https://' + CONFIG.app.domain + CONFIG.api.baseURL + CONFIG.api.authen.url;
 
-const CONFIG = require('../config.json');
-const axios  = require('axios');
-const API    = 'https://' + CONFIG.app.domain + CONFIG.api.baseURL + CONFIG.api.authen.url;
-
-function post_handler2(req, res, next)
+function post_handler2(_req:express.Request, res:express.Response, next:express.NextFunction):void
 {
-  const inputs      = res.locals.inputs;
-  const AuthorError = res.locals.AuthorError;
-  const axiosConfig = {
+  const inputs:AuthorInputs = res.locals.inputs;
+  const axiosConfig:AxiosRequestConfig = {
     url:        API,
-    method:     'post',
+    method:     'POST',
     data:       {
       appID: inputs.credential.appID,
       token: inputs.credential.token
     },
-    timeout:    CONFIG.api.authen.timeout
+    timeout:    CONFIG.api.author.timeout
   };
 
-  axios(axiosConfig).then( r=> {
+  axios(axiosConfig).then( r => {
     if (r.data.result === true)
     {
       next();
@@ -30,14 +30,18 @@ function post_handler2(req, res, next)
     }
     else
     {
-      next( new AuthorError('authentication failure', 8, 403) );
+      let error = {message: 'authentication failure', code: '4'};
+      let response = {statusCode: '403'};
+      next( new AuthorError(error, response) );
       return;
     }
   })
   .catch( e => {
-    next( new AuthorError('authentication failure', 8, 500, e) );
+    let error = {message: 'authentication server failure', code: '10'};
+    let response = {statusCode: '500'};
+    next( new AuthorError(error, response, e) );
     return;
   });
 }
 
-module.exports = post_handler2;
+export { post_handler2 };
