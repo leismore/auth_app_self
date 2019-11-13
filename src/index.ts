@@ -2,21 +2,20 @@
  * The Main Script of auth_app_self Project
  */
 
-'use strict';
-
 // Import modules
-const express                  = require('express');
-const cors                     = require('cors');
-const corsOptions              = {
-  origin:  require('./corsOrigin'),
+import * as express           from 'express';
+import cors                   = require('cors');
+import bodyParser             = require('body-parser');
+import { corsOrigin }         from './corsOrigin';
+import { error_handler_last } from '@leismore/error_handler_last';
+import * as authen            from './authen/index';
+import * as author            from './author/index';
+import * as CONFIG            from './config.json';
+
+const corsOptions:cors.CorsOptions = {
+  origin:  corsOrigin,
   methods: ['OPTIONS', 'GET', 'POST']
 };
-const bodyParser               = require('body-parser');
-const authen                   = require('./authen/index');
-const author                   = require('./author/index');
-const CONFIG                   = require('./config.json');
-const error_handler_LMError    = require('@leismore/error_handler_lmerror');
-const error_handler_Error      = require('@leismore/error_handler_error');
 
 // Init.
 let app = express();
@@ -37,10 +36,10 @@ app.get(     AUTHOR_URL, author.get_handler1 );
 app.post(    AUTHOR_URL, author.post_handler1, author.post_handler2, author.post_handler3 );
 
 // Error handling
-app.use( error_handler_LMError, error_handler_Error );
+app.use( error_handler_last );
 
 // Start server
-app.listen( CONFIG.app.port,
+app.listen( Number(CONFIG.app.port),
             CONFIG.app.host,
             CONFIG.app.backlog,
   () => {
@@ -49,5 +48,4 @@ app.listen( CONFIG.app.port,
       `<${CONFIG.app.host}:${CONFIG.app.port}>`
     );
   }
-  
 );
