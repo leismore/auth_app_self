@@ -8,11 +8,10 @@
  * 3              CouchDB (View): get_permission failure
  * 4              authentication failure
  * 5              invalid credential
- * 6              invalid clientID
- * 7              invalid hostID
- * 8              invalid permission
- * 9              HTTP 405: Method Not Allowed
- * 10             authentication server failure
+ * 6              invalid hostID
+ * 7              invalid permission
+ * 8              HTTP 405: Method Not Allowed
+ * 9              authentication server failure
  */
 
 import { LMError } from '@leismore/lmerror';
