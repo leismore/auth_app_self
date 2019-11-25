@@ -30,7 +30,7 @@ function post_handler3(_req:express.Request, res:express.Response, next:express.
   }
 
   // Get data from DB
-  get_permission(db, [inputs.data.clientID, inputs.data.hostID, inputs.data.permission])
+  get_permission(db, [inputs.credential.appID, inputs.data.hostID, inputs.data.permission])
   .then( r => {
     if (r.rows.length === 0 || r.rows[0].value === false)
     {

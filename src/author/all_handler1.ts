@@ -10,7 +10,7 @@ function all_handler1(req:express.Request, _res:express.Response, next:express.N
 {
   if ( ALLOWED.includes( req.method.toUpperCase() ) === false )
   {
-    let error = {message: 'HTTP 405: Method Not Allowed', code: '9'};
+    let error = {message: 'HTTP 405: Method Not Allowed', code: '8'};
     let response = {
       statusCode: '405',
       headers: {'Allow': ALLOWED.join(', ')}

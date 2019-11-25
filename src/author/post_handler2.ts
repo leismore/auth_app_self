@@ -37,7 +37,7 @@ function post_handler2(_req:express.Request, res:express.Response, next:express.
     }
   })
   .catch( e => {
-    let error = {message: 'authentication server failure', code: '10'};
+    let error = {message: 'authentication server failure', code: '9'};
     let response = {statusCode: '500'};
     next( new AuthorError(error, response, e) );
     return;
