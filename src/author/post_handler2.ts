@@ -19,7 +19,7 @@ function post_handler2(_req:express.Request, res:express.Response, next:express.
       appID: inputs.credential.appID,
       token: inputs.credential.token
     },
-    timeout:    CONFIG.api.author.timeout
+    timeout:    CONFIG.api.authen.timeout
   };
 
   axios(axiosConfig).then( r => {
