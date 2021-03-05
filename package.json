@@ -1,6 +1,6 @@
 {
   "name": "@leismore/auth_app_self",
-  "version": "1.0.3",
+  "version": "2.0.0",
   "description": "A NodeJS application providing authentication and authorization services for all LMOS NodeJS applications.",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -17,7 +17,7 @@
     "API"
   ],
   "author": "Kyle Chine",
-  "license": "MIT",
+  "license": "AGPL-3.0-only",
   "private": true,
   "bugs": {
     "url": "https://github.com/leismore/auth_app_self/issues"
