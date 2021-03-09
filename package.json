@@ -10,7 +10,7 @@
     "start-test2": "mocha './test/test2.ts'",
     "test1": "start-server-and-test start-server http://localhost:8080/api/authenticator start-test1",
     "test2": "start-server-and-test start-server http://localhost:8080/api/authorizer    start-test2",
-    "test":  "npm run test1; npm run test2",
+    "test": "npm run test1; npm run test2",
     "build": "tsc"
   },
   "repository": {
