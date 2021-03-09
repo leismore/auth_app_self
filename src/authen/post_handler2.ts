@@ -2,8 +2,8 @@
  * POST handler 2 - Authentication
  */
 
-import * as express       from 'express';
-import * as nano          from 'nano';
+import express          = require('express');
+import nano             = require('nano');
 import { Token }          from '@leismore/token';
 
 import { AuthenError }    from '../lib/AuthenError';

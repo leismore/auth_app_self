@@ -2,7 +2,7 @@
  * POST Handler 1 - Verify Client Input
  */
 
-import * as express     from 'express';
+import express        = require('express');
 import { AuthorError }  from '../lib/AuthorError';
 import { AuthorInputs } from '../lib/AuthorInputs';
 

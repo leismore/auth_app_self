@@ -2,7 +2,7 @@
  * AuthorInputs class: the input data for authorization.
  */
 
-import * as auth                           from 'basic-auth';
+import auth                              = require('basic-auth');
 import { AuthorError }                     from './AuthorError';
 import { AuthenInputs }                    from './AuthenInputs';
 import { AuthenInputs as InputCredential } from './type/AuthenInputs';

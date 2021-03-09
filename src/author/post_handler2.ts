@@ -2,12 +2,15 @@
  * POST Handler 2 - Authentication
  */
 
-import * as express                           from 'express';
+import express                              = require('express');
 import {default as axios, AxiosRequestConfig} from 'axios';
 import { AuthorError }                        from '../lib/AuthorError';
 import { AuthorInputs }                       from '../lib/AuthorInputs';
 import * as CONFIG                            from '../config.json';
-const API = 'https://' + CONFIG.app.domain + CONFIG.api.baseURL + CONFIG.api.authen.url;
+
+const API = CONFIG.app.ssl ?
+  ( `https://${CONFIG.app.domain}:${CONFIG.app.publicPort}${CONFIG.api.baseURL}${CONFIG.api.authen.url}` ) :
+  (  `http://${CONFIG.app.domain}:${CONFIG.app.publicPort}${CONFIG.api.baseURL}${CONFIG.api.authen.url}` );
 
 function post_handler2(_req:express.Request, res:express.Response, next:express.NextFunction):void
 {

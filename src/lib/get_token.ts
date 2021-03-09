@@ -4,7 +4,7 @@
 
 import { ViewValue_getToken as Value } from './type/db_view_getToken_value';
 import { AuthenDoc }                   from './type/db_doc_authen';
-import * as NANO                       from 'nano';
+import NANO                          = require('nano');
 import * as CONFIG                     from '../config.json';
 const DESIGN_NAME    = CONFIG.couchdb.designName;
 const VIEW_NAME      = 'get_token';

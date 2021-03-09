@@ -3,9 +3,11 @@
   {
     "projectName":  "auth_app_self",
     "host":         "localhost",
-    "port":         "YOUR_HOST_PORT",
+    "port":         "8080",
     "backlog":       511,
-    "domain":       "YOUR-DOMAIN.COM"
+    "domain":       "localhost",
+    "publicPort":   "8080",
+    "ssl":          false
   },
 
   "couchdb":

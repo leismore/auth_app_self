@@ -2,8 +2,8 @@
  * POST handler 3 - Authorization
  */
 
-import * as express       from 'express';
-import * as nano          from 'nano';
+import express          = require('express');
+import nano             = require('nano');
 import { AuthorError }    from '../lib/AuthorError';
 import { AuthorInputs }   from '../lib/AuthorInputs';
 import { AuthorResponse } from '../lib/AuthorResponse';

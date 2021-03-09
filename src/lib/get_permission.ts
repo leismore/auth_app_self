@@ -4,7 +4,7 @@
 
 import { ViewKey_getPermission as Key } from './type/db_view_getPermission_key';
 import { AuthorDoc }                    from './type/db_doc_author';
-import * as NANO                        from 'nano';
+import NANO                           = require('nano');
 import * as CONFIG                      from '../config.json';
 const DESIGN_NAME    = CONFIG.couchdb.designName;
 const VIEW_NAME      = 'get_permission';

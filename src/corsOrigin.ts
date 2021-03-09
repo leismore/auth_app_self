@@ -3,6 +3,6 @@
  * Refer to <https://www.npmjs.com/package/cors#configuration-options>
  */
 
-let corsOrigin = 'http://YOUR-DOMAIN.com';
+const corsOrigin = 'http://localhost:8080';
 
 export { corsOrigin };

@@ -3,9 +3,8 @@
  */
 
 // Import modules
-import * as express           from 'express';
+import express                = require('express');
 import cors                   = require('cors');
-import bodyParser             = require('body-parser');
 import { corsOrigin }         from './corsOrigin';
 import { error_handler_last } from '@leismore/error_handler_last';
 import * as authen            from './authen/index';
@@ -14,12 +13,12 @@ import * as CONFIG            from './config.json';
 
 const corsOptions:cors.CorsOptions = {
   origin:  corsOrigin,
-  methods: ['OPTIONS', 'GET', 'POST']
+  methods: ['OPTIONS', 'GET', 'POST', 'HEAD']
 };
 
 // Init.
 let app = express();
-app.use( cors(corsOptions), bodyParser.json() );
+app.use( cors(corsOptions), express.json() );
 
 // Authentication module
 const        AUTHEN_URL = CONFIG.api.baseURL + CONFIG.api.authen.url;
