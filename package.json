@@ -6,8 +6,8 @@
   "types": "./dist/index.d.ts",
   "scripts": {
     "start-server": "ts-node ./src/index.ts",
-    "start-test1": "mocha './test/test1.ts'",
-    "start-test2": "mocha './test/test2.ts'",
+    "start-test1": "mocha ./test/test1.ts",
+    "start-test2": "mocha ./test/test2.ts",
     "test1": "start-server-and-test start-server http://localhost:8080/api/authenticator start-test1",
     "test2": "start-server-and-test start-server http://localhost:8080/api/authorizer    start-test2",
     "test": "npm run test1; npm run test2",
