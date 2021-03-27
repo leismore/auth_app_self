@@ -52,7 +52,7 @@ function post_handler2(_req:express.Request, res:express.Response, next:express.
         token:       new Token({
           token:     r.rows[0].value.token,
           generated: r.rows[0].value.generated,
-          expiry:    r.rows[0].value.expiry === null ? undefined : r.rows[0].value.expiry
+          expiry:    r.rows[0].value.expiry
         })
       };
     }
