@@ -13,7 +13,8 @@ import * as CONFIG            from './config.json';
 
 const corsOptions:cors.CorsOptions = {
   origin:  corsOrigin,
-  methods: ['OPTIONS', 'GET', 'POST', 'HEAD']
+  methods: ['OPTIONS', 'GET', 'POST', 'HEAD'],
+  preflightContinue: true
 };
 
 // Init.
