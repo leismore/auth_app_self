@@ -25,6 +25,7 @@ function post_handler3(_req:express.Request, res:express.Response, next:express.
   } catch (e) {
     let error = {message: 'CouchDB: connection failure', code: '2'};
     let response = {statusCode: '500'};
+    // @ts-ignore
     next( new AuthorError(error, response, e) );
     return;
   }

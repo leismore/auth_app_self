@@ -40,6 +40,7 @@ class AuthorInputs
       } catch (e) {
         let error = {message: 'invalid credential', code: '5'};
         let response = {statusCode: '415'};
+        // @ts-ignore
         throw new AuthorError(error, response, e);
       }
     }
