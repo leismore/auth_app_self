@@ -2,9 +2,10 @@
  * connect_db function: Connect to the CouchDB
  */
 
-import NANO          = require('nano');
-import { AuthError }   from './AuthError';
-import * as CREDENTIAL from '../credential/couchdb.json';
+import NANO          =   require('nano');
+import { AuthError }     from './AuthError';
+import * as CREDENTIAL   from '../credential/couchdb.json';
+import { unknown2error } from '@leismore/unknown2error';
 
 /**
  * @throw {AuthError}
@@ -21,10 +22,10 @@ function connect_db():NANO.ServerScope
                          CREDENTIAL.port
     );
   } catch (e) {
+    const f = unknown2error(e);
     let error = { message: 'CouchDB: connection failure', code: '2' };
     let response = { statusCode:'500' };
-    // @ts-ignore
-    throw new AuthError(error, response, e);
+    throw new AuthError(error, response, f);
   }
 }
 

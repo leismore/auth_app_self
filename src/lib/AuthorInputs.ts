@@ -7,6 +7,7 @@ import { AuthorError }                     from './AuthorError';
 import { AuthenInputs }                    from './AuthenInputs';
 import { AuthenInputs as InputCredential } from './type/AuthenInputs';
 import { AuthorInputs as InputData       } from './type/AuthorInputs';
+import { unknown2error }                   from '@leismore/unknown2error';
 
 class AuthorInputs
 {
@@ -38,10 +39,10 @@ class AuthorInputs
         };
         credential = new AuthenInputs(credentialInput);
       } catch (e) {
+        const f = unknown2error(e);
         let error = {message: 'invalid credential', code: '5'};
         let response = {statusCode: '415'};
-        // @ts-ignore
-        throw new AuthorError(error, response, e);
+        throw new AuthorError(error, response, f);
       }
     }
 

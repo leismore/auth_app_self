@@ -13,6 +13,7 @@ import { connect_db }     from '../lib/connect_db';
 import { get_token }      from '../lib/get_token';
 import { AuthenDoc }      from '../lib/type/db_doc_authen';
 import { AuthenDB }       from '../lib/type/AuthenDB';
+import { unknown2error }  from '@leismore/unknown2error';
 
 import * as CONFIG        from '../config.json';
 const DB_NAME             = CONFIG.couchdb.dbPrefix + '_private_app_authentication';
@@ -28,10 +29,10 @@ function post_handler2(_req:express.Request, res:express.Response, next:express.
   try {
     db = connect_db().use(DB_NAME);
   } catch (e) {
+    const f = unknown2error(e);
     let error = {message: 'CouchDB: connection failure', code: '2'};
     let response = {statusCode: '500'};
-    // @ts-ignore
-    next( new AuthenError(error, response, e) );
+    next( new AuthenError(error, response, f) );
     return;
   }
 

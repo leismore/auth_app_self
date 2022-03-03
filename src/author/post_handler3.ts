@@ -10,6 +10,7 @@ import { AuthorResponse } from '../lib/AuthorResponse';
 import { AuthorDoc }      from '../lib/type/db_doc_author';
 import { connect_db }     from '../lib/connect_db';
 import { get_permission } from '../lib/get_permission';
+import { unknown2error }  from '@leismore/unknown2error';
 import * as CONFIG        from '../config.json';
 const DB_NAME = CONFIG.couchdb.dbPrefix + '_private_app_authorization';
 
@@ -23,10 +24,10 @@ function post_handler3(_req:express.Request, res:express.Response, next:express.
   try {
     db = connect_db().use(DB_NAME);
   } catch (e) {
+    const f = unknown2error(e);
     let error = {message: 'CouchDB: connection failure', code: '2'};
     let response = {statusCode: '500'};
-    // @ts-ignore
-    next( new AuthorError(error, response, e) );
+    next( new AuthorError(error, response, f) );
     return;
   }
 
